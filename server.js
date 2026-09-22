@@ -685,22 +685,6 @@ function formatMessage(data) {
                 );
             }
 
-            // Ghi chú vẫn luôn được in riêng
-            if (group.note) {
-
-                for (
-                    const noteLine of
-                    formatWrapped(
-                        group.note,
-                        28
-                    )
-                ) {
-                    lines.push(
-                        `       📝 ${noteLine}`
-                    );
-                }
-            }
-
             if (
                 group.giaVi &&
                 Object.keys(group.giaVi).length
@@ -718,6 +702,22 @@ function formatMessage(data) {
                         `       🧂 Bỏ gia vị: ${boGiaVi.join(", ")}`
                     );
 
+                }
+            }
+
+            // Ghi chú luôn là dòng cuối của phần tùy chỉnh bát.
+            if (group.note) {
+
+                for (
+                    const noteLine of
+                    formatWrapped(
+                        group.note,
+                        28
+                    )
+                ) {
+                    lines.push(
+                        `       📝 ${noteLine}`
+                    );
                 }
             }
         }
