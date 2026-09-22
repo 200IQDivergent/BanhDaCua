@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bánh Đa Cua Cô Huệ</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+<div class="container">
+  <h1>🍜 Bánh Đa Cua Cô Huệ</h1>
+  <h3>🪑 Bàn số: <span id="soBan"></span></h3>
+
+  <table>
+    <tr>
+      <th colspan="2">Đồ Ăn</th>
+      <th>Số lượng</th>
+      <th>Tùy chỉnh</th>
+    </tr>
+    
+<tr>
+  <td class="food-group" rowspan="3">Bánh đa / Bún thập cẩm 30.000 đ</td>
+  <td class="variant">Trắng</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tc_trang',-1)">−</button>
+      <span id="tc_trang_display">0</span>
+      <button type="button" onclick="changeQty('tc_trang',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tc_trang')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tc_trang">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Đỏ</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tc_do',-1)">−</button>
+      <span id="tc_do_display">0</span>
+      <button type="button" onclick="changeQty('tc_do',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tc_do')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tc_do">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Bún</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tc_bun',-1)">−</button>
+      <span id="tc_bun_display">0</span>
+      <button type="button" onclick="changeQty('tc_bun',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tc_bun')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tc_bun">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  <td class="food-group" rowspan="3">Bánh đa / Bún siêu topping 50.000 đ</td>
+  <td class="variant">Trắng</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('st_trang',-1)">−</button>
+      <span id="st_trang_display">0</span>
+      <button type="button" onclick="changeQty('st_trang',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('st_trang')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_st_trang">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Đỏ</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('st_do',-1)">−</button>
+      <span id="st_do_display">0</span>
+      <button type="button" onclick="changeQty('st_do',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('st_do')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_st_do">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Bún</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('st_bun',-1)">−</button>
+      <span id="st_bun_display">0</span>
+      <button type="button" onclick="changeQty('st_bun',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('st_bun')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_st_bun">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  <td class="food-group" rowspan="3">Bánh đa / Bún trộn thập cẩm 35.000 đ</td>
+  <td class="variant">Trắng</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tron_trang',-1)">−</button>
+      <span id="tron_trang_display">0</span>
+      <button type="button" onclick="changeQty('tron_trang',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tron_trang')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tron_trang">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Đỏ</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tron_do',-1)">−</button>
+      <span id="tron_do_display">0</span>
+      <button type="button" onclick="changeQty('tron_do',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tron_do')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tron_do">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Bún</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tron_bun',-1)">−</button>
+      <span id="tron_bun_display">0</span>
+      <button type="button" onclick="changeQty('tron_bun',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tron_bun')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tron_bun">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  <td class="food-group" rowspan="3">Bánh đa / Bún trộn<br>siêu topping 50.000 đ</td>
+  <td class="variant">Trắng</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tron_st_tc_trang',-1)">−</button>
+      <span id="tron_st_tc_trang_display">0</span>
+      <button type="button" onclick="changeQty('tron_st_tc_trang',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tron_st_tc_trang')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tron_st_tc_trang">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Đỏ</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tron_st_tc_do',-1)">−</button>
+      <span id="tron_st_tc_do_display">0</span>
+      <button type="button" onclick="changeQty('tron_st_tc_do',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tron_st_tc_do')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tron_st_tc_do">Chưa gọi món</div>
+  </td>
+</tr>
+<tr>
+  
+  <td class="variant">Bún</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('tron_st_tc_bun',-1)">−</button>
+      <span id="tron_st_tc_bun_display">0</span>
+      <button type="button" onclick="changeQty('tron_st_tc_bun',1)">+</button>
+    </div>
+    <span class="unit">(bát)</span>
+  </td>
+  <td class="custom-cell">
+    <button type="button" class="custom-btn" onclick="openBowls('tron_st_tc_bun')">⚙️ Sửa topping mỗi bát</button>
+    <div class="custom-summary" id="summary_tron_st_tc_bun">Chưa gọi món</div>
+  </td>
+</tr>
+  </table>
+
+  <table>
+    <tr>
+      <th>Nước Uống</th>
+      <th>Số lượng</th>
+      <th>Ghi chú</th>
+    </tr>
+    
+<tr>
+  <td>Nước sâm thanh nhiệt 5.000 đ</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('nuocSam',-1)">−</button>
+      <span id="nuocSam_display">0</span>
+      <button type="button" onclick="changeQty('nuocSam',1)">+</button>
+    </div>
+  </td>
+  <td><textarea id="ghichu_nuocSam" rows="2" placeholder="Ghi chú..."></textarea></td>
+</tr>
+<tr>
+  <td>Nước vối mát lạnh 5.000 đ</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('nuocVoi',-1)">−</button>
+      <span id="nuocVoi_display">0</span>
+      <button type="button" onclick="changeQty('nuocVoi',1)">+</button>
+    </div>
+  </td>
+  <td><textarea id="ghichu_nuocVoi" rows="2" placeholder="Ghi chú..."></textarea></td>
+</tr>
+<tr>
+  <td>Nước ngọt ( tự phục vụ ) 12.000 đ - 15.000 đ</td>
+  <td>
+    <div class="quantity-control">
+      <button type="button" onclick="changeQty('nuocNgot',-1)">−</button>
+      <span id="nuocNgot_display">0</span>
+      <button type="button" onclick="changeQty('nuocNgot',1)">+</button>
+    </div>
+  </td>
+  <td><textarea id="ghichu_nuocngot" rows="2" placeholder="Ghi chú..."></textarea></td>
+</tr>
+  </table>
+
+  <div class="fanpage-banner">
+    🌟 Ghé thăm FANPAGE để nhận VOUCHER giảm giá 🌟
+    <a class="fanpage-btn" href="https://www.facebook.com/BanhDaCuaCoHue.160PhanDangLuu.KienAn.HaiPhong" target="_blank">📱 FANPAGE</a>
+  </div>
+
+  <div class="voucher-container">
+    <span>Đã có Voucher? Dùng ngay kẻo hết hạn</span>
+    <input type="text" id="voucher" placeholder="Nhập mã từ FANPAGE nếu có">
+    <button type="button" id="applyVoucher">Áp dụng</button>
+  </div>
+
+  <button
+    id="submitBtn"
+    type="button"
+    onclick="guiDon()"
+    >
+    📩 GỬI ĐƠN
+    </button>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="modalTitle">⚙️ Sửa topping mỗi bát</div>
+        <div class="modal-sub">Mỗi bát có thể yêu cầu riêng. Bát nào không chỉnh sẽ giữ nguyên món mặc định. <b>Ghi chú luôn hiển thị ở dòng riêng.</b></div>
+      </div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div id="bowlList" class="bowl-list"></div>
+
+    <div class="modal-bottom">
+      <button class="cancel" onclick="closeModal()">Hủy</button>
+      <button id="applyBtn" class="apply" onclick="applyAll()" style="display:none">✓ Xong</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const quantities = {};
+const bowlCustomizations = {};
+let currentProduct = null;
+let daGuiDon = false;
+let dangGuiDon = false;
+let voucherValid = false;
+let daApDungVoucher = false;
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const soBan =
+    params.get("table");
+
+const PRODUCT_NAMES = {
+  "tc_trang": "Bánh đa / Bún thập cẩm 30.000 đ - Trắng",
+  "tc_do": "Bánh đa / Bún thập cẩm 30.000 đ - Đỏ",
+  "tc_bun": "Bánh đa / Bún thập cẩm 30.000 đ - Bún",
+  "st_trang": "Bánh đa / Bún siêu topping 50.000 đ - Trắng",
+  "st_do": "Bánh đa / Bún siêu topping 50.000 đ - Đỏ",
+  "st_bun": "Bánh đa / Bún siêu topping 50.000 đ - Bún",
+  "tron_trang": "Bánh đa / Bún trộn thập cẩm 35.000 đ - Trắng",
+  "tron_do": "Bánh đa / Bún trộn thập cẩm 35.000 đ - Đỏ",
+  "tron_bun": "Bánh đa / Bún trộn thập cẩm 35.000 đ - Bún",
+  "tron_st_tc_trang": "Bánh đa / Bún trộn thập cẩm siêu topping 50.000 đ - Trắng",
+  "tron_st_tc_do": "Bánh đa / Bún trộn thập cẩm siêu topping 50.000 đ - Đỏ",
+  "tron_st_tc_bun": "Bánh đa / Bún trộn thập cẩm siêu topping 50.000 đ - Bún"
+};
+const DEFAULT_TYPES = {
+  "tc_trang": "Thập cẩm",
+  "tc_do": "Thập cẩm",
+  "tc_bun": "Thập cẩm",
+  "st_trang": "Siêu topping",
+  "st_do": "Siêu topping",
+  "st_bun": "Siêu topping",
+  "tron_trang": "Trộn thập cẩm",
+  "tron_do": "Trộn thập cẩm",
+  "tron_bun": "Trộn thập cẩm",
+  "tron_st_tc_trang": "Trộn thập cẩm siêu topping",
+  "tron_st_tc_do": "Trộn thập cẩm siêu topping",
+  "tron_st_tc_bun": "Trộn thập cẩm siêu topping"
+};
+const ALL_TOPPINGS = [
+  'ĐẬU',
+  'THỊT TRẦN',
+  'CHẢ LÁ LỐT',
+  'CHẢ GIÒ',
+  'THỊT RÁN',
+  'CHẢ VIÊN',
+  'TRỨNG CÚT',
+  'CHẢ CÁ',
+  'CÁ RÁN'
+];
+
+const GIA_VI = [
+  'HÀNH LÁ',
+  'HÀNH PHI',
+  'MÌ CHÍNH'
+];
+
+function getQuantity(id) {
+  return quantities[id] || 0;
+}
+
+function changeQty(id, delta) {
+  const next = Math.max(0, getQuantity(id) + delta);
+  quantities[id] = next;
+  const el = document.getElementById(id + '_display');
+  if (el) el.textContent = next;
+
+  if (!bowlCustomizations[id]) bowlCustomizations[id] = [];
+  bowlCustomizations[id].length = next;
+  for (let i = 0; i < next; i++) {
+    if (bowlCustomizations[id][i] === undefined) bowlCustomizations[id][i] = null;
+  }
+
+  if (next === 0) bowlCustomizations[id] = [];
+  updateSummary(id);
+  if (currentProduct === id && document.getElementById('overlay').style.display === 'block') renderBowls();
+}
+
+function updateSummary(id) {
+  const el = document.getElementById('summary_' + id);
+  if (!el) return;
+  const qty = getQuantity(id);
+  if (!qty) {
+    el.textContent = 'Chưa gọi món';
+    return;
+  }
+  const arr = bowlCustomizations[id] || [];
+  const count = arr.filter(Boolean).length;
+  el.textContent = `${qty} bát · ${count} bát tùy chỉnh · còn lại mặc định ${DEFAULT_TYPES[id] || 'món'}`;
+}
+
+function openBowls(id) {
+  if (getQuantity(id) === 0) {
+    changeQty(id, 1);
+  }
+  currentProduct = id;
+  syncBowlArray(id);
+  document.getElementById('modalTitle').textContent = '⚙️ ' + (PRODUCT_NAMES[id] || 'Sửa topping mỗi bát');
+  renderBowls();
+  document.getElementById('overlay').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('overlay').style.display = 'none';
+  currentProduct = null;
+}
+
+function syncBowlArray(id) {
+  if (!bowlCustomizations[id]) bowlCustomizations[id] = [];
+  const qty = getQuantity(id);
+  bowlCustomizations[id].length = qty;
+  for (let i = 0; i < qty; i++) {
+    if (bowlCustomizations[id][i] === undefined) bowlCustomizations[id][i] = null;
+  }
+}
+
+function renderBowls() {
+  const list = document.getElementById('bowlList');
+  syncBowlArray(currentProduct);
+  const qty = getQuantity(currentProduct);
+  list.innerHTML = '';
+
+  for (let i = 0; i < qty; i++) {
+    const custom = bowlCustomizations[currentProduct][i];
+    const card = document.createElement('div');
+    card.className = 'bowl-card';
+
+    const statusText = custom
+      ? customSummary(custom)
+      : (DEFAULT_TYPES[currentProduct] || 'Món mặc định') + ' — chưa tùy chỉnh';
+
+    card.innerHTML = `
+      <div class="bowl-top">
+        <div>
+          <div class="bowl-name">🍜 Bát ${i + 1}</div>
+          <div class="bowl-status ${custom ? 'custom' : ''}">${escapeHtml(statusText)}</div>
+        </div>
+        <div class="bowl-actions">
+          <button class="small-btn" onclick="toggleEditor(${i})">${custom ? '✏️ Sửa bát' : '⚙️ Sửa topping'}</button>
+          ${custom ? `<button class="reset-btn" onclick="resetBowl(${i})">↩ Đặt mặc định</button>` : ''}
+        </div>
+      </div>
+
+      <div class="editor" id="editor_${i}">
+        <div class="editor-title">Yêu cầu cho Bát ${i + 1}</div>
+
+        <div class="section-head">✅ CHỈ ĂN</div>
+        <div class="section-note">Chỉ chọn những thành phần khách muốn ăn trong bát này.</div>
+        <div class="options">
+            <label class="option">
+              <input type="checkbox" data-only="ĐẬU">
+              ĐẬU
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="THỊT TRẦN">
+              THỊT TRẦN
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="CHẢ LÁ LỐT">
+              CHẢ LÁ LỐT
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="CHẢ GIÒ">
+              CHẢ GIÒ
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="THỊT RÁN">
+              THỊT RÁN
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="CHẢ VIÊN">
+              CHẢ VIÊN
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="TRỨNG CÚT">
+              TRỨNG CÚT
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="CHẢ CÁ">
+              CHẢ CÁ
+            </label>
+            <label class="option">
+              <input type="checkbox" data-only="CÁ RÁN">
+              CÁ RÁN
+            </label>
+        </div>
+        
+        <div class="section-head">❌ KHÔNG ĂN</div>
+        <div class="section-note">Chỉ chọn những thành phần khách không muốn ăn trong bát này.</div>
+        <div class="options">
+            <label class="option">
+              <input type="checkbox" data-remove="ĐẬU">
+              ĐẬU
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="THỊT TRẦN">
+              THỊT TRẦN
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="CHẢ LÁ LỐT">
+              CHẢ LÁ LỐT
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="CHẢ GIÒ">
+              CHẢ GIÒ
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="THỊT RÁN">
+              THỊT RÁN
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="CHẢ VIÊN">
+              CHẢ VIÊN
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="TRỨNG CÚT">
+              TRỨNG CÚT
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="CHẢ CÁ">
+              CHẢ CÁ
+            </label>
+            <label class="option">
+              <input type="checkbox" data-remove="CÁ RÁN">
+              CÁ RÁN
+            </label>
+        </div>
+
+        <div class="section-head">
+        🧂 GIA VỊ
+        </div>
+
+        <div class="section-note">
+        Mặc định quán cho đầy đủ gia vị, khách có thể bỏ từng loại.
+        </div>
+
+        <div class="gia-vi">
+
+        <label class="gia-item">
+        HÀNH LÁ
+
+        <div class="gia-toggle">
+        <button type="button" 
+        class="gia-btn active"
+        data-gia="HÀNH LÁ"
+        data-value="Có">
+        Có
+        </button>
+
+        <button type="button"
+        class="gia-btn"
+        data-gia="HÀNH LÁ"
+        data-value="Không">
+        Không
+        </button>
+        </div>
+
+        </label>
+
+
+        <label class="gia-item">
+        HÀNH PHI
+
+        <div class="gia-toggle">
+        <button type="button"
+        class="gia-btn active"
+        data-gia="HÀNH PHI"
+        data-value="Có">
+        Có
+        </button>
+
+        <button type="button"
+        class="gia-btn"
+        data-gia="HÀNH PHI"
+        data-value="Không">
+        Không
+        </button>
+        </div>
+
+        </label>
+
+
+        <label class="gia-item">
+        MÌ CHÍNH
+
+        <div class="gia-toggle">
+        <button type="button"
+        class="gia-btn active"
+        data-gia="MÌ CHÍNH"
+        data-value="Có">
+        Có
+        </button>
+
+        <button type="button"
+        class="gia-btn"
+        data-gia="MÌ CHÍNH"
+        data-value="Không">
+        Không
+        </button>
+
+        </div>
+
+        </label>
+
+        </div>
+
+        <div class="section-head">Ghi chú khác</div>
+        <textarea class="note" id="note_${i}" placeholder="Ví dụ: nhiều nước, ít nước, để riêng..."></textarea>
+        <button class="editor-save" onclick="saveBowl(${i})">✓ Lưu yêu cầu Bát ${i + 1}</button>
+      </div>
+    `;
+    list.appendChild(card);
+
+    card.querySelectorAll(".gia-btn").forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+          const parent = btn.closest(".gia-toggle");
+
+          parent.querySelectorAll(".gia-btn")
+          .forEach(b => b.classList.remove("active"));
+
+          btn.classList.add("active");
+
+      });
+
+  });
+
+    const editor = document.getElementById('editor_' + i);
+    if (custom) populateEditor(i, custom);
+
+    editor.querySelectorAll('input[data-only],input[data-remove]').forEach(cb => {
+      cb.addEventListener('change', () => syncExclusive(editor));
+    });
+    syncExclusive(editor);
+  }
+}
+
+function toggleEditor(index) {
+  const editor = document.getElementById('editor_' + index);
+  if (!editor) return;
+  editor.style.display = editor.style.display === 'block' ? 'none' : 'block';
+}
+
+function syncExclusive(editor) {
+  const onlyInputs = [...editor.querySelectorAll('input[data-only]')];
+  const removeInputs = [...editor.querySelectorAll('input[data-remove]')];
+  const onlyChecked = onlyInputs.some(x => x.checked);
+  const removeChecked = removeInputs.some(x => x.checked);
+
+  removeInputs.forEach(cb => {
+    cb.disabled = onlyChecked;
+    cb.closest('.option')?.classList.toggle('disabled', onlyChecked);
+  });
+  onlyInputs.forEach(cb => {
+    cb.disabled = removeChecked;
+    cb.closest('.option')?.classList.toggle('disabled', removeChecked);
+  });
+}
+
+function populateEditor(index, data) {
+  const editor = document.getElementById('editor_' + index);
+  if (!editor) return;
+  const only = data.only || [];
+  const remove = data.remove || [];
+
+  editor.querySelectorAll('input[data-only]').forEach(cb => {
+    cb.checked = only.includes(cb.getAttribute('data-only'));
+  });
+  editor.querySelectorAll('input[data-remove]').forEach(cb => {
+    cb.checked = remove.includes(cb.getAttribute('data-remove'));
+  });
+  document.getElementById('note_' + index).value = data.note || '';
+
+  editor.querySelectorAll('.gia-toggle').forEach(toggle => {
+
+    const gia =
+        toggle.querySelector('.gia-btn')?.dataset.gia;
+
+    const value =
+        data.giaVi?.[gia] || "Có";
+
+
+    toggle.querySelectorAll('.gia-btn')
+    .forEach(btn=>{
+
+        btn.classList.remove("active");
+
+        if(btn.dataset.value === value){
+            btn.classList.add("active");
+        }
+
+    });
+
+  });
+
+  syncExclusive(editor);
+}
+
+function saveBowl(index){
+  const editor = document.getElementById('editor_' + index);
+  if(!editor) return;
+
+  const only = [...editor.querySelectorAll('input[data-only]:checked')]
+    .map(cb => cb.getAttribute('data-only'));
+
+  const remove = [...editor.querySelectorAll('input[data-remove]:checked')]
+    .map(cb => cb.getAttribute('data-remove'));
+
+  // Hai nhóm không được phép chọn đồng thời.
+  if(only.length && remove.length){
+    alert('Không thể chọn đồng thời CHỈ ĂN và KHÔNG ĂN.');
+    return;
+  }
+
+  const note = document.getElementById('note_' + index).value.trim();
+
+  const giaVi = {};
+
+  editor.querySelectorAll('.gia-toggle').forEach(toggle => {
+
+    const active = toggle.querySelector('.gia-btn.active');
+
+    if (!active) return;
+
+    const gia = active.dataset.gia;
+    const value = active.dataset.value;
+
+    // Chỉ gửi khi khách bỏ (Không)
+    if (value === "Không") {
+        giaVi[gia] = "Không";
+    }
+
+  });
+
+  // Nếu tích TOÀN BỘ 12 thành phần ở một phía,
+  // ý nghĩa thực tế là ăn Thập cẩm bình thường.
+  const allSelectedOnly = only.length === ALL_TOPPINGS.length;
+  const allSelectedRemove = remove.length === ALL_TOPPINGS.length;
+
+  if(!bowlCustomizations[currentProduct]) bowlCustomizations[currentProduct] = [];
+
+  if(allSelectedOnly || allSelectedRemove){
+
+    bowlCustomizations[currentProduct][index] =
+        note
+            ? {
+                only: [],
+                remove: [],
+                note: note
+            }
+            : null;
+
+  }else{
+    const hasAny = only.length || remove.length || note;
+
+    bowlCustomizations[currentProduct][index] = hasAny || Object.keys(giaVi).length ? {
+
+      only,
+      remove,
+      giaVi,
+      note
+
+    } : null;
+  }
+
+  // Render lại để trạng thái "Thập cẩm mặc định" xuất hiện ngay sau khi lưu.
+  renderBowls();
+  updateSummary(currentProduct);
+  document.getElementById("applyBtn").style.display = "block";
+}
+
+function resetBowl(index) {
+  bowlCustomizations[currentProduct][index] = null;
+  renderBowls();
+  updateSummary(currentProduct);
+}
+
+function applyAll() {
+  updateSummary(currentProduct);
+  closeModal();
+}
+
+function normalizeCustomization(c) {
+  if (!c) return null;
+  const only = [...new Set(c.only || [])];
+  const remove = [...new Set(c.remove || [])];
+  const note = c.note || '';
+  const giaVi = c.giaVi || {};
+
+  // 12/12 ở CHỈ ĂN hoặc KHÔNG ĂN = Thập cẩm mặc định.
+  if (
+      only.length === ALL_TOPPINGS.length ||
+      remove.length === ALL_TOPPINGS.length
+  ) {
+      return note
+          ? {
+              only: [],
+              remove: [],
+              note
+          }
+          : null;
+    }
+
+  if (only.length > ALL_TOPPINGS.length / 2) {
+    return {
+      only: [],
+      remove: ALL_TOPPINGS.filter(x => !only.includes(x)),
+      note,
+      convertedFrom: 'only'
+    };
+  }
+
+  if (remove.length > ALL_TOPPINGS.length / 2) {
+    return {
+      only: ALL_TOPPINGS.filter(x => !remove.includes(x)),
+      remove: [],
+      note,
+      convertedFrom: 'remove'
+    };
+  }
+
+  return {only, remove, giaVi, note};
+}
+
+function customSummary(c) {
+
+  const lines = [];
+
+  if (c.only?.length)
+    lines.push('✅ Chỉ ăn: ' + c.only.join(', '));
+
+  if (c.remove?.length)
+    lines.push('❌ Không ăn: ' + c.remove.join(', '));
+
+
+  if(c.giaVi){
+
+    const bo = Object.keys(c.giaVi)
+      .filter(x => c.giaVi[x] === 'Không');
+
+    if(bo.length)
+      lines.push('🧂 Bỏ gia vị: ' + bo.join(', '));
+
+  }
+
+
+  if(c.note)
+    lines.push('📝 ' + c.note);
+
+
+  return lines.length ? lines.join('\n') : 'Đã tùy chỉnh';
+
+}
+
+async function checkVoucher() {
+    if (daApDungVoucher) {
+        alert(
+            "❌ Bạn đã dùng voucher này rồi!"
+        );
+
+        return;
+    }
+
+    const voucherInput =
+        document.getElementById("voucher");
+
+    if (!voucherInput) {
+        return;
+    }
+
+    const code =
+        voucherInput.value.trim();
+
+    if (code === "") {
+        voucherValid = false;
+
+        alert(
+            "Nhập mã voucher (Nếu có)!"
+        );
+
+        return;
+    }
+
+    try {
+        const response =
+            await fetch(
+                "/api/checkVoucher",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        code: code
+                    })
+                }
+            );
+
+        const result =
+            await response.json();
+
+        if (result.valid) {
+            voucherValid = true;
+            daApDungVoucher = true;
+
+            alert(
+                "✅ Voucher hợp lệ!\n\n" +
+                (result.gift || "")
+            );
+
+            return;
+        }
+
+        voucherValid = false;
+
+        alert(
+            "❌ Voucher không hợp lệ!\n\n" +
+            "Voucher không hợp lệ. " +
+            "Hãy ghé thăm FANPAGE để nhận được " +
+            "VOUCHER mới nhất"
+        );
+
+    } catch (error) {
+        voucherValid = false;
+
+        console.error(
+            "Lỗi checkVoucher:",
+            error
+        );
+
+        alert(
+            "❌ Không thể kết nối tới server!"
+        );
+    }
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        const applyVoucher =
+            document.getElementById(
+                "applyVoucher"
+            );
+
+        if (!applyVoucher) {
+            return;
+        }
+
+        applyVoucher.addEventListener(
+            "click",
+            checkVoucher
+        );
+    }
+);
+
+if (soBan) {
+
+    document.getElementById(
+        "soBan"
+    ).textContent = soBan;
+
+}
+
+async function guiDon() {
+
+    // =========================
+    // 1. CHỐNG GỬI 2 LẦN
+    // =========================
+
+    if (daGuiDon || dangGuiDon) {
+
+        alert(
+            "❌ Đơn này đang được gửi hoặc đã gửi rồi!\n\n" +
+            "Vui lòng không bấm GỬI ĐƠN nhiều lần."
+        );
+
+        return;
+    }
+
+    dangGuiDon = true;
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "⏳ ĐANG GỬI...";
+    }
+
+
+    // =========================
+    // 2. KIỂM TRA SỐ BÀN
+    // =========================
+
+    if (
+        !soBan ||
+        isNaN(parseInt(soBan))
+    ) {
+
+        dangGuiDon = false;
+
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "📩 GỬI ĐƠN";
+        }
+
+        alert(
+            "❌ QR không hợp lệ!\n\n" +
+            "Vui lòng quét lại QR."
+        );
+
+        return;
+    }
+
+
+    // =========================
+    // 3. KIỂM TRA VOUCHER
+    // =========================
+
+    const voucher =
+        document
+            .getElementById("voucher")
+            .value
+            .trim();
+
+    if (
+        voucher !== "" &&
+        voucherValid === false
+    ) {
+
+        dangGuiDon = false;
+
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "📩 GỬI ĐƠN";
+        }
+
+        alert(
+            "❌ Không thể gửi đơn\n\n" +
+            "Vui lòng áp dụng voucher TRƯỚC KHI gửi đơn. " +
+            "Có thể bỏ qua bước này nếu không có voucher."
+        );
+
+        return;
+    }
+
+    // ==================================================
+    // HÀM TẠO DANH SÁCH TỪNG BÁT
+    // ==================================================
+
+    function buildBowls(productId) {
+
+        const qty =
+            quantities[productId] || 0;
+
+
+        if (qty <= 0) {
+
+            return [];
+        }
+
+
+        syncBowlArray(productId);
+
+
+        const result = [];
+
+
+        for (
+            let i = 0;
+            i < qty;
+            i++
+        ) {
+
+            const raw =
+                bowlCustomizations[productId]?.[i] || null;
+
+
+            // Không tùy chỉnh
+            // => null
+            // => backend hiểu là món mặc định
+
+            const normalized =
+                normalizeCustomization(raw);
+
+
+            result.push({
+
+                bat: i + 1,
+
+                tuyChinh:
+                    normalized
+
+            });
+        }
+
+
+        return result;
+    }
+
+
+    // ==================================================
+    // 4. TẠO DATA GỬI BACKEND
+    // ==================================================
+
+    const data = {
+
+        soBan:
+            parseInt(soBan),
+
+
+        // =========================
+        // BÁNH ĐA / BÚN THẬP CẨM
+        // =========================
+
+        thapCam: {
+
+            trang: {
+
+                soLuong:
+                    quantities.tc_trang || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tc_trang"
+                    )
+            },
+
+
+            do: {
+
+                soLuong:
+                    quantities.tc_do || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tc_do"
+                    )
+            },
+
+
+            bun: {
+
+                soLuong:
+                    quantities.tc_bun || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tc_bun"
+                    )
+            }
+
+        },
+
+
+        // =========================
+        // SIÊU TOPPING
+        // =========================
+
+        sieuTopping: {
+
+            trang: {
+
+                soLuong:
+                    quantities.st_trang || 0,
+
+                cacBat:
+                    buildBowls(
+                        "st_trang"
+                    )
+            },
+
+
+            do: {
+
+                soLuong:
+                    quantities.st_do || 0,
+
+                cacBat:
+                    buildBowls(
+                        "st_do"
+                    )
+            },
+
+
+            bun: {
+
+                soLuong:
+                    quantities.st_bun || 0,
+
+                cacBat:
+                    buildBowls(
+                        "st_bun"
+                    )
+            }
+
+        },
+
+
+        // =========================
+        // TRỘN THẬP CẨM
+        // =========================
+
+        tron: {
+
+            trang: {
+
+                soLuong:
+                    quantities.tron_trang || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tron_trang"
+                    )
+            },
+
+
+            do: {
+
+                soLuong:
+                    quantities.tron_do || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tron_do"
+                    )
+            },
+
+
+            bun: {
+
+                soLuong:
+                    quantities.tron_bun || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tron_bun"
+                    )
+            }
+
+        },
+
+
+        // =====================================
+        // TRỘN THẬP CẨM SIÊU TOPPING
+        // =====================================
+
+        tronThapCamSieuTopping: {
+
+            trang: {
+
+                soLuong:
+                    quantities.tron_st_tc_trang || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tron_st_tc_trang"
+                    )
+            },
+
+
+            do: {
+
+                soLuong:
+                    quantities.tron_st_tc_do || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tron_st_tc_do"
+                    )
+            },
+
+
+            bun: {
+
+                soLuong:
+                    quantities.tron_st_tc_bun || 0,
+
+                cacBat:
+                    buildBowls(
+                        "tron_st_tc_bun"
+                    )
+            }
+
+        },
+
+
+        // =========================
+        // NƯỚC UỐNG
+        // =========================
+
+        nuocUong: {
+
+            nuocSam: {
+
+                soLuong:
+                    quantities.nuocSam || 0,
+
+                ghiChu:
+                    document
+                        .getElementById(
+                            "ghichu_nuocSam"
+                        )
+                        .value
+                        .trim()
+
+            },
+
+
+            nuocVoi: {
+
+                soLuong:
+                    quantities.nuocVoi || 0,
+
+                ghiChu:
+                    document
+                        .getElementById(
+                            "ghichu_nuocVoi"
+                        )
+                        .value
+                        .trim()
+
+            },
+
+
+            nuocNgot: {
+
+                soLuong:
+                    quantities.nuocNgot || 0,
+
+                ghiChu:
+                    document
+                        .getElementById(
+                            "ghichu_nuocngot"
+                        )
+                        .value
+                        .trim()
+
+            }
+
+        },
+
+
+        // =========================
+        // VOUCHER
+        // =========================
+
+        voucherCode:
+            voucher
+
+    };
+
+
+    console.log(
+        "===== DATA GUI DON ====="
+    );
+
+    console.log(
+        JSON.stringify(
+            data,
+            null,
+            2
+        )
+    );
+
+
+    // =========================
+    // 5. GỬI BACKEND
+    // =========================
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/save",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            data
+                        )
+
+                }
+            );
+
+
+        let result = {};
+
+
+        try {
+
+            result =
+                await response.json();
+
+        }
+        catch {
+
+            result = {};
+
+        }
+
+
+        // =========================
+        // THÀNH CÔNG
+        // =========================
+
+        if (response.ok) {
+
+            daGuiDon = true;
+            dangGuiDon = false;
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "✅ ĐÃ GỬI ĐƠN";
+            }
+
+            alert(
+                "✅ Đã gửi đơn thành công!"
+            );
+
+            return;
+        }
+
+
+        // =========================
+        // THẤT BẠI
+        // =========================
+
+        console.error(
+            "Server trả lỗi:",
+            result
+        );
+
+        dangGuiDon = false;
+
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "📩 GỬI ĐƠN";
+        }
+
+        alert(
+            "❌ Gửi đơn thất bại!\n\n" +
+            (
+                result.message ||
+                "Server không nhận được đơn."
+            )
+        );
+
+
+    }
+    catch (error) {
+
+        console.error(
+            "Lỗi guiDon:",
+            error
+        );
+
+        dangGuiDon = false;
+
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "📩 GỬI ĐƠN";
+        }
+
+        alert(
+            "❌ Không thể kết nối tới server!"
+        );
+    }
+
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[ch]);
+}
+function escapeAttr(s) { return escapeHtml(s); }
+</script>
+</body>
+</html>
