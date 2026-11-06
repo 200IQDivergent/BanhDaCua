@@ -964,173 +964,110 @@ function formatMessage(data) {
     return lines.join("\n");
 }
 
-// =========================
-// KẾT NỐI MÁY IN RASPBERRY PI QUA SSE
-// Không cần mở port trên router, Pi chủ động kết nối ra Render.
-// =========================
-
-const PRINTER_SECRET = process.env.PRINTER_SECRET || "";
-let activePrinterResponse = null;
-const printerQueue = [];
-const pendingPrints = new Map();
-
-function printerAuthorized(req) {
-    const auth = req.headers.authorization || "";
-    return PRINTER_SECRET &&
-        auth === `Bearer ${PRINTER_SECRET}`;
-}
-
-function dispatchNextPrint() {
-    if (!activePrinterResponse || activePrinterResponse.writableEnded) return;
-    if (printerQueue.length === 0) return;
-
-    const job = printerQueue.shift();
-    job.sent = true;
-
-    try {
-        activePrinterResponse.write(
-            `event: order\\ndata: ${JSON.stringify({
-                id: job.id,
-                text: job.text
-            })}\\n\\n`
-        );
-        console.log("📤 Đã chuyển đơn tới Raspberry Pi:", job.id);
-    } catch (error) {
-        console.error("❌ Không gửi được đơn tới Pi:", error);
-        printerQueue.unshift(job);
-    }
-}
-
-app.get("/printer/stream", (req, res) => {
-    if (!printerAuthorized(req)) {
-        return res.status(401).end("Unauthorized");
-    }
-
-    if (activePrinterResponse && activePrinterResponse !== res) {
-        activePrinterResponse.end();
-    }
-
-    activePrinterResponse = res;
-    res.writeHead(200, {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache, no-transform",
-        "Connection": "keep-alive",
-        "X-Accel-Buffering": "no"
-    });
-    res.write(": printer connected\\n\\n");
-    console.log("🟢 Raspberry Pi đã kết nối máy in");
-
-    const heartbeat = setInterval(() => {
-        if (!res.writableEnded) res.write(": ping\\n\\n");
-    }, 20000);
-
-    res.on("close", () => {
-        clearInterval(heartbeat);
-        if (activePrinterResponse === res) activePrinterResponse = null;
-        console.log("🔴 Raspberry Pi ngắt kết nối máy in");
-    });
-
-    dispatchNextPrint();
-});
-
-app.post("/printer/ack", (req, res) => {
-    if (!printerAuthorized(req)) {
-        return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    const { id, ok, error } = req.body || {};
-    const pending = pendingPrints.get(id);
-
-    if (!pending) {
-        return res.status(404).json({ message: "Không tìm thấy đơn đang chờ xác nhận" });
-    }
-
-    clearTimeout(pending.timer);
-    pendingPrints.delete(id);
-
-    if (ok === true) {
-        pending.resolve();
-        console.log("✅ Pi xác nhận đã in:", id);
-    } else {
-        pending.reject(new Error(String(error || "Máy in báo lỗi")));
-        console.error("❌ Pi báo in lỗi:", id, error);
-    }
-
-    res.json({ received: true });
-    dispatchNextPrint();
-});
-
-// =========================
-// NHẬN ĐƠN TỪ WEBSITE
-// =========================
-
 app.post("/api/save", async (req, res) => {
+
     const data = req.body || {};
 
+
     if (!data.soBan) {
-        return res.status(400).json({ message: "Thiếu số bàn" });
-    }
 
-    if (!PRINTER_SECRET) {
-        console.error("❌ Chưa cấu hình PRINTER_SECRET trên Render");
-        return res.status(500).json({ message: "Máy chủ chưa cấu hình máy in" });
-    }
-
-    if (!activePrinterResponse || activePrinterResponse.writableEnded) {
-        return res.status(503).json({
-            message: "Máy in đang ngoại tuyến. Vui lòng báo nhân viên tại quầy."
+        return res.status(400).json({
+            message: "Thiếu số bàn"
         });
     }
 
-    const message = formatMessage(data);
-    const id = require("crypto").randomUUID();
 
-    console.log("📥 Nhận đơn bàn", data.soBan, "ID:", id);
+    console.log(
+        "===== DATA ORDER ====="
+    );
+
+    console.log(
+        JSON.stringify(
+            data,
+            null,
+            2
+        )
+    );
+
+
+    const message =
+        formatMessage(data);
+
+
+    console.log(
+        "===== DISCORD MESSAGE ====="
+    );
+
+    console.log(message);
+
 
     try {
-        const printed = new Promise((resolve, reject) => {
-            const timer = setTimeout(() => {
-                pendingPrints.delete(id);
-                reject(new Error("Hết thời gian chờ Raspberry Pi xác nhận in"));
-            }, 60000);
 
-            pendingPrints.set(id, { resolve, reject, timer });
-        });
-
-        printerQueue.push({ id, text: message, sent: false });
-        dispatchNextPrint();
-
-        await printed;
-
-        // Discord chỉ là thông báo phụ; lỗi Discord không làm hỏng đơn đã in.
-        if (DISCORD_WEBHOOK_URL) {
-            fetch(DISCORD_WEBHOOK_URL, {
+        const discordResponse = await fetch(
+            DISCORD_WEBHOOK_URL,
+            {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
                 body: JSON.stringify({
                     username: DISCORD_WEBHOOK_USERNAME,
                     avatar_url: DISCORD_WEBHOOK_AVATAR_URL,
                     content: message
                 })
-            }).then(async response => {
-                if (!response.ok) {
-                    console.error("⚠️ Discord webhook lỗi:", response.status, await response.text());
-                } else {
-                    console.log("🔔 Đã gửi thông báo Discord");
-                }
-            }).catch(error => console.error("⚠️ Không gửi được Discord:", error));
+            }
+        );
+
+        if (!discordResponse.ok) {
+
+            const errorText =
+                await discordResponse.text();
+
+            console.error(
+                "❌ Discord từ chối webhook:",
+                discordResponse.status,
+                errorText
+            );
+
+            return res.status(500).json({
+                message: "Không thể gửi đơn tới Discord"
+            });
         }
 
-        return res.json({
-            message: "Đơn đã được Raspberry Pi in thành công",
-            orderId: id
-        });
+        console.log(
+            "✅ Đã gửi Discord"
+        );
+
+
     } catch (error) {
-        console.error("❌ Không in được đơn:", id, error);
-        return res.status(504).json({
-            message: "Không xác nhận được việc in đơn. Vui lòng kiểm tra máy in trước khi gửi lại."
+
+        console.error(
+            "❌ Lỗi gửi Discord:",
+            error
+        );
+
+
+        return res.status(500).json({
+            message:
+                "Lỗi gửi Discord"
         });
     }
+
+
+    return res.json({
+
+        message:
+            "Đã nhận đơn hàng",
+
+        pretty:
+            data,
+
+        discordMessage:
+            message
+    });
+
 });
 
 // start
