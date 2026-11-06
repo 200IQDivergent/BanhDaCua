@@ -989,10 +989,10 @@ function dispatchNextPrint() {
 
     try {
         activePrinterResponse.write(
-            `event: order\\ndata: ${JSON.stringify({
+            `event: order\ndata: ${JSON.stringify({
                 id: job.id,
                 text: job.text
-            })}\\n\\n`
+            })}\n\n`
         );
         console.log("📤 Đã chuyển đơn tới Raspberry Pi:", job.id);
     } catch (error) {
@@ -1017,11 +1017,11 @@ app.get("/printer/stream", (req, res) => {
         "Connection": "keep-alive",
         "X-Accel-Buffering": "no"
     });
-    res.write(": printer connected\\n\\n");
+    res.write(": printer connected\n\n");
     console.log("🟢 Raspberry Pi đã kết nối máy in");
 
     const heartbeat = setInterval(() => {
-        if (!res.writableEnded) res.write(": ping\\n\\n");
+        if (!res.writableEnded) res.write(": ping\n\n");
     }, 20000);
 
     res.on("close", () => {
